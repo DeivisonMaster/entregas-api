@@ -3,6 +3,8 @@ package br.com.entrega.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,12 +50,12 @@ public class ClienteController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public Cliente adiciona(@RequestBody Cliente cliente) {
+	public Cliente adiciona(@Valid @RequestBody Cliente cliente) {
 		return service.adiciona(cliente);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> adiciona(@PathVariable Long id, @RequestBody Cliente cliente) {
+	public ResponseEntity<Cliente> atualiza(@Valid @PathVariable Long id, @RequestBody Cliente cliente) {
 		Optional<Cliente> clienteOptional = service.buscaPorId(id);
 		if(!clienteOptional.isPresent()) {
 			return ResponseEntity.notFound().build();
