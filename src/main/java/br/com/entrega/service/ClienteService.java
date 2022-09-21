@@ -1,7 +1,7 @@
 package br.com.entrega.service;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,23 @@ public class ClienteService {
 	private ClienteRepository repository;
 
 	public List<Cliente> listar() {
-		Cliente c = new Cliente();
-		c.setId(1L);
-		c.setNome("João");
-		return Arrays.asList(c);
+		return repository.findAll();
+	}
+
+	public List<Cliente> buscaPorNome(String nome) {
+		return repository.findByNomeContaining(nome);
+	}
+
+	public Optional<Cliente> buscaPorId(Long id) {
+		return repository.findById(id);
+	}
+
+	public Cliente adiciona(Cliente cliente) {
+		return repository.save(cliente);
+	}
+
+	public void excluir(Long id) {
+		repository.deleteById(id);
 	}
 
 }
