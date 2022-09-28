@@ -12,7 +12,7 @@ import br.com.entrega.domain.model.Cliente;
 import br.com.entrega.domain.repository.ClienteRepository;
 
 @Service
-public class ClienteService {
+public class CatalagoClienteService {
 	
 	@Autowired
 	private ClienteRepository repository;
@@ -27,6 +27,10 @@ public class ClienteService {
 
 	public Optional<Cliente> buscaPorId(Long id) {
 		return repository.findById(id);
+	}
+	
+	public Cliente buscar(Long id) throws NegocioException {
+		return buscaPorId(id).orElseThrow(() -> new NegocioException("Cliente inexistente!"));
 	}
 
 	@Transactional

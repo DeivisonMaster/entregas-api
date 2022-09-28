@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +34,11 @@ public class Entrega {
 	private Long id;
 	
 	private BigDecimal taxa;
+	
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime dataPedido;
+	
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime dataFinalizacao;
 	
 	@ManyToOne
@@ -41,6 +48,7 @@ public class Entrega {
 	@Embedded
 	private Destinatario destinatario;
 	
+	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private StatusEntrega status;
 	

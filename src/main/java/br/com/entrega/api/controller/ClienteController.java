@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.entrega.domain.exception.NegocioException;
 import br.com.entrega.domain.model.Cliente;
-import br.com.entrega.domain.service.ClienteService;
+import br.com.entrega.domain.service.CatalagoClienteService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 	
 	@Autowired
-	private ClienteService service;
+	private CatalagoClienteService service;
 	
 	@GetMapping
 	public List<Cliente> listar() {
