@@ -1,4 +1,4 @@
-package br.com.entrega.model;
+package br.com.entrega.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

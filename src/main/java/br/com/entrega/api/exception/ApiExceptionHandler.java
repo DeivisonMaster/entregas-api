@@ -1,4 +1,4 @@
-package br.com.entrega.exception;
+package br.com.entrega.api.exception;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,8 +14,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import br.com.entrega.domain.exception.NegocioException;
 
 
 @ControllerAdvice
@@ -43,6 +46,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		apiLogErro.setCampos(campos);
 		
 		return handleExceptionInternal(ex, apiLogErro , headers, status, request);
+	}
+	
+	@ExceptionHandler(NegocioException.class)
+	public ResponseEntity<Object> handleNegocioException(NegocioException ex, WebRequest request){
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		ApiLogErro apiLogErro = new ApiLogErro();
+		apiLogErro.setTitulo(ex.getMessage());
+		apiLogErro.setDataHora(LocalDateTime.now());
+		apiLogErro.setStatus(status.value());
+		
+		return handleExceptionInternal(ex, apiLogErro, new HttpHeaders(), status, request);
 	}
 	
 }

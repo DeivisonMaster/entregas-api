@@ -1,4 +1,4 @@
-package br.com.entrega.controller;
+package br.com.entrega.api.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.entrega.model.Cliente;
-import br.com.entrega.service.ClienteService;
+import br.com.entrega.domain.exception.NegocioException;
+import br.com.entrega.domain.model.Cliente;
+import br.com.entrega.domain.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
@@ -50,12 +50,12 @@ public class ClienteController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public Cliente adiciona(@Valid @RequestBody Cliente cliente) {
+	public Cliente adiciona(@Valid @RequestBody Cliente cliente) throws NegocioException {
 		return service.adiciona(cliente);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> atualiza(@Valid @PathVariable Long id, @RequestBody Cliente cliente) {
+	public ResponseEntity<Cliente> atualiza(@Valid @PathVariable Long id, @RequestBody Cliente cliente) throws NegocioException {
 		Optional<Cliente> clienteOptional = service.buscaPorId(id);
 		if(!clienteOptional.isPresent()) {
 			return ResponseEntity.notFound().build();
