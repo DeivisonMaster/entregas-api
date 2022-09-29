@@ -2,6 +2,8 @@ package br.com.entrega.api.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +35,7 @@ public class EntregaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Entrega solicitar(@RequestBody Entrega entrega) throws NegocioException {
+	public Entrega solicitar(@Valid @RequestBody Entrega entrega) throws NegocioException {
 		return entregaService.solicitar(entrega);
 	}
 	
