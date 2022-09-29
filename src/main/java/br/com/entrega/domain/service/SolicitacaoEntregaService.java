@@ -1,7 +1,6 @@
 package br.com.entrega.domain.service;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
+import java.time.OffsetDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class SolicitacaoEntregaService {
 		Cliente cliente = clienteService.buscar(entrega.getCliente().getId());
 		
 		entrega.setStatus(StatusEntrega.PENDENTE);
-		entrega.setDataPedido(LocalDateTime.now());
+		entrega.setDataPedido(OffsetDateTime.now());
 		entrega.setCliente(cliente);
 		
 		return repository.save(entrega);
