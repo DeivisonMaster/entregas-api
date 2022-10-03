@@ -41,10 +41,8 @@ public class Entrega {
 	@NotNull
 	private BigDecimal taxa;
 	
-	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataPedido;
 	
-	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataFinalizacao;
 	
 	@Valid
@@ -57,7 +55,6 @@ public class Entrega {
 	@Embedded
 	private Destinatario destinatario;
 	
-	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private StatusEntrega status;
 	
