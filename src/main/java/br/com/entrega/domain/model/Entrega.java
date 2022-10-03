@@ -23,6 +23,7 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
 import br.com.entrega.domain.ValidationGroups;
+import br.com.entrega.domain.exception.NegocioException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,5 +71,21 @@ public class Entrega {
 		
 		this.getOcorrencias().add(ocorrencia);
 		return ocorrencia;
+	}
+
+	public void finalizar() throws NegocioException {
+		if(naoPodeSerFinalizada()) {
+			throw new NegocioException("Entrega não pode ser finalizada!");
+		}
+		setStatus(StatusEntrega.FINALIZADA);
+		setDataFinalizacao(OffsetDateTime.now());
+	}
+	
+	private boolean podeSerFinalizada() {
+		return StatusEntrega.PENDENTE.equals(getStatus());
+	}
+
+	private boolean naoPodeSerFinalizada() {
+		return !podeSerFinalizada();
 	}
 }

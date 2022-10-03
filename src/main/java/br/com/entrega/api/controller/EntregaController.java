@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,6 +24,7 @@ import br.com.entrega.api.model.EntregaDTOentrada;
 import br.com.entrega.domain.exception.NegocioException;
 import br.com.entrega.domain.model.Entrega;
 import br.com.entrega.domain.repository.EntregaRepository;
+import br.com.entrega.domain.service.FinalizacaoEntregaService;
 import br.com.entrega.domain.service.SolicitacaoEntregaService;
 
 @RestController
@@ -38,9 +40,18 @@ public class EntregaController {
 	@Autowired
 	private EntregaModelMapper entregaModelMapper;
 	
+	@Autowired
+	private FinalizacaoEntregaService finalizacaoEntregaService;
+	
 	@GetMapping
 	public List<EntregaDTO> listar(){
 		return entregaModelMapper.obtemListaEntregaDTO(entregaRepository.findAll());
+	}
+	
+	@PutMapping("/{id}/finalizar")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void finalizar(@PathVariable Long id) throws NegocioException {
+		finalizacaoEntregaService.finalizar(id);
 	}
 	
 	@PostMapping
