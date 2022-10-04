@@ -26,4 +26,9 @@ public class OcorrenciaModelMapper {
 		return entrega.getOcorrencias().stream()
 				.map(this::obtemOcorrenciaSaidaPorOcorrencia).collect(Collectors.toList());
 	}
+
+	public List<OcorrenciaDTOSaida> obtemListaOcorencia(List<Ocorrencia> ocorrencias) {
+		return ocorrencias.stream().map(this::obtemOcorrenciaSaidaPorOcorrencia).collect(Collectors.toList());
+	}
+	
 }

@@ -12,4 +12,5 @@ public class OcorrenciaDTOSaida {
 	private Long id;
 	private String descricao;
 	private OffsetDateTime dataRegistro;
+	private EntregaClienteDTO entrega; 
 }

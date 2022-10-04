@@ -1,0 +1,8 @@
+CONCEITOS VISTOS:
+
+- padrão de modelagem de recursos de APIs
+- pacotes divididos representation model x domain model
+- model mapper
+- DTO para entrada e saída de dados
+- tratamento de exceções em API com handle
+- maior isolamento de casos de uso em classes de serviço
